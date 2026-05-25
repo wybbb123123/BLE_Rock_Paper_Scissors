@@ -231,17 +231,30 @@ class 蓝牙通信器<消息>(
             .build()
         val 广播数据 = AdvertiseData.Builder()
             .addServiceUuid(ParcelUuid(服务识别码))
+            .setIncludeDeviceName(false)
+            .build()
+        val 扫描回应数据 = AdvertiseData.Builder()
             .addManufacturerData(配置.厂商编号, 配置.应用标记.toByteArray(StandardCharsets.UTF_8))
             .setIncludeDeviceName(false)
             .build()
         val 回调 = object : AdvertiseCallback() {
             override fun onStartFailure(errorCode: Int) {
-                可变连接状态流.value = 连接状态.出错("广播启动失败 $errorCode")
+                可变连接状态流.value = 连接状态.出错("广播启动失败 $errorCode，${广播错误说明(errorCode)}")
             }
         }
-        广播器.startAdvertising(广播设置, 广播数据, 回调)
+        广播器.startAdvertising(广播设置, 广播数据, 扫描回应数据, 回调)
         广播回调 = 回调
     }
+
+    private fun 广播错误说明(错误码: Int): String =
+        when (错误码) {
+            AdvertiseCallback.ADVERTISE_FAILED_DATA_TOO_LARGE -> "广播数据过大"
+            AdvertiseCallback.ADVERTISE_FAILED_TOO_MANY_ADVERTISERS -> "广播实例过多"
+            AdvertiseCallback.ADVERTISE_FAILED_ALREADY_STARTED -> "广播已经启动"
+            AdvertiseCallback.ADVERTISE_FAILED_INTERNAL_ERROR -> "系统内部错误"
+            AdvertiseCallback.ADVERTISE_FAILED_FEATURE_UNSUPPORTED -> "设备不支持此广播能力"
+            else -> "未知错误"
+        }
 
     @SuppressLint("MissingPermission")
     private fun 启动扫描() {
