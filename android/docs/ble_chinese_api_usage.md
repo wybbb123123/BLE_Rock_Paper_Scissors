@@ -117,10 +117,19 @@ class 对局消息编解码器 : 消息编解码器<对局消息> {
 
 ## 示例 App 验收
 
+在 Android Studio 中打开仓库的 `android` 目录，不要单独打开 `sample_app` 子目录。Gradle 同步后应能看到 `:app`、`:ble_chinese_api`、`:sample_app` 三个模块。
+
 构建示例：
 
 ```bash
+cd android
 bash ./gradlew :sample_app:assembleDebug
+```
+
+APK 位置：
+
+```text
+android/sample_app/build/outputs/apk/debug/sample_app-debug.apk
 ```
 
 两台 Android 设备安装同一个 `sample_app` APK 后：

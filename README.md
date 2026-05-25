@@ -24,12 +24,45 @@ The Android project now includes a reusable Chinese-named BLE library module and
 
 ## Android Build
 
+Open the `android` directory in Android Studio, not the `sample_app` subdirectory.
+After Gradle sync, the project contains three modules:
+
+- `:app`，rock paper scissors prototype
+- `:ble_chinese_api`，Chinese-named BLE library
+- `:sample_app`，minimal library sample
+
 ```bash
 cd android
 JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home \
 ANDROID_HOME=/Users/wanghaha/bounty-work-all/android-sdk \
 GRADLE_USER_HOME=/Users/wanghaha/bounty-work-all/.gradle-cache \
 bash ./gradlew --no-daemon --stacktrace :app:assembleDebug
+```
+
+Build the sample app APK:
+
+```bash
+cd android
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home \
+ANDROID_HOME=/Users/wanghaha/bounty-work-all/android-sdk \
+GRADLE_USER_HOME=/Users/wanghaha/bounty-work-all/.gradle-cache \
+bash ./gradlew --no-daemon --stacktrace :sample_app:assembleDebug
+```
+
+The output APK is:
+
+```text
+android/sample_app/build/outputs/apk/debug/sample_app-debug.apk
+```
+
+Build all Android modules:
+
+```bash
+cd android
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home \
+ANDROID_HOME=/Users/wanghaha/bounty-work-all/android-sdk \
+GRADLE_USER_HOME=/Users/wanghaha/bounty-work-all/.gradle-cache \
+bash ./gradlew --no-daemon --stacktrace :app:assembleDebug :ble_chinese_api:assembleDebug :sample_app:assembleDebug
 ```
 
 ## Notes
