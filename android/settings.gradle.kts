@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "BLEOfflineMVPAndroid"
 include(":app")
+include(":ble_chinese_api")
+include(":sample_app")

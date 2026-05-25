@@ -13,6 +13,15 @@ The app keeps the first version intentionally small:
 
 This repository is separated from BLE_BBS so the prototype can validate reuse of the BLE communication layer without replacing the BBS app.
 
+## BLE Chinese API Module
+
+The Android project now includes a reusable Chinese-named BLE library module and a minimal text messaging sample app.
+
+- Library module，`android/ble_chinese_api`
+- Minimal sample app，`android/sample_app`
+- Usage doc，`android/docs/ble_chinese_api_usage.md`
+- Publishing doc，`android/docs/ble_chinese_api_publishing.md`
+
 ## Android Build
 
 ```bash
